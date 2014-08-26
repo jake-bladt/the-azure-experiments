@@ -3,9 +3,16 @@
  xmlns=
 "http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <WebRole name="WebRole1" enableNativeCodeExecution="false">
-    <InputEndpoints>
-      <InputEndpoint name="HttpIn" protocol="http" port="80" />
-    </InputEndpoints>
+  	<Site name="Web">
+  	  <Bindings>
+        <Binding name="Https_staging" endpointName="Https"  />
+        <Binding name="Http_staging" endpointName="Http" />
+      </Bindings>
+  	</Site>
+    <Endpoints>
+      <InputEndpoint name="Https" protocol="https" port="443" certificate="SSL" />
+      <InputEndpoint name="Http" protocol="http" port="80" />
+    </Endpoints>
     <ConfigurationSettings />
   </WebRole>
 </ServiceDefinition>
